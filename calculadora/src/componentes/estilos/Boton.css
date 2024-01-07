@@ -15,11 +15,11 @@
     user-select: none;
 }
 .boton-contenedor:hover{
-    background-color: blueviolet;
+    background-color: rgb(139, 27, 204);
 }
 
 .operador {
-    background-color: #075023;
+    background-color: #104d29;
 }
 
 .operador:hover{
