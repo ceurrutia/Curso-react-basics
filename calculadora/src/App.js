@@ -4,6 +4,8 @@ import Boton from "./componentes/Boton.js";
 import Pantalla from "./componentes/Pantalla.js";
 import BotonClear from "./componentes/BotonClear.js";
 import { useState } from "react";
+import { evaluate } from 'mathjs';
+
 
 function App() {
   const [input, setInput] = useState('');
@@ -11,6 +13,17 @@ function App() {
   const agregarInput = (val) => {
     setInput(input + val);
   };
+
+  const calcularResultado = () => {
+    try {
+      let formattedInput = input.replace(/[^-()\d/*+.]/g, ''); // Filtrar caracteres no permitidos
+      setInput(evaluate(formattedInput));
+    } catch (error) {
+      setInput('Error');
+    }
+  };
+  
+  
 
   return (
     <div className="App">
@@ -38,13 +51,14 @@ function App() {
             <Boton manejarClick={agregarInput}> * </Boton>
           </div>
           <div className="fila">
-            <Boton manejarClick={agregarInput}> = </Boton>
+            <Boton manejarClick={calcularResultado}> = </Boton>
             <Boton manejarClick={agregarInput}> 0 </Boton>
             <Boton manejarClick={agregarInput}> . </Boton>
             <Boton manejarClick={agregarInput}> / </Boton>
           </div>
           <div className="fila">
-            <BotonClear>Clear</BotonClear>
+            <BotonClear manejarClear={() => setInput('')}>Clear
+            </BotonClear>
           </div>
         </div>
       </div>
